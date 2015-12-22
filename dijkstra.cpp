@@ -49,10 +49,10 @@ void DijkstraVertex::setKnown(bool value) {
 }
 
 DijkstraVertex::DijkstraVertex(): 
-        distance(1000000), isKnown(false){}
+        distance(1000000), isKnown(false) {}
 
 
-map<int, vector<AdjVertex>> gatherInput(string fileName){
+map<int, vector<AdjVertex>> gatherInput(string fileName) {
     int numNodes; int name; double weight; int nodeKey;
     map<int, vector<AdjVertex>> adjacencyList;
     ifstream inputStream;
@@ -92,18 +92,18 @@ void dijkstra(map<int, vector<AdjVertex>> adjacencyList, int start) {
     while (pq.size() > 0) {
         currentVertex = pq.top().getName();
         pq.pop();
-        for (auto e : adjacencyList[currentVertex]) {
-            if (!vertexMap[e.name].known()) {
-                vertexMap[e.name].setDistance(e.weight + vertexMap[currentVertex].getDistance());
-                vertexMap[e.name].setPrevious(currentVertex);
-                vertexMap[e.name].setKnown(true);
-                pq.push(vertexMap[e.name]);
+        for (auto vertex : adjacencyList[currentVertex]) {
+            if (!vertexMap[vertex].known()) {
+                vertexMap[vertex].setDistance(e.weight + vertexMap[currentVertex].getDistance());
+                vertexMap[vertex].setPrevious(currentVertex);
+                vertexMap[vertex].setKnown(true);
+                pq.push(vertexMap[vertex]);
                 
             }
             else {
-                if (vertexMap[e.name].getDistance() > vertexMap[currentVertex].getDistance() + e.weight) {
-                    vertexMap[e.name].setDistance(vertexMap[currentVertex].getDistance() + e.weight);
-                    vertexMap[e.name].setPrevious(currentVertex);
+                if (vertexMap[vertex].getDistance() > vertexMap[currentVertex].getDistance() + vertex.weight) {
+                    vertexMap[vertex].setDistance(vertexMap[currentVertex].getDistance() + vertex.weight);
+                    vertexMap[vertex].setPrevious(currentVertex);
                 }
             }
         }
@@ -113,7 +113,7 @@ void dijkstra(map<int, vector<AdjVertex>> adjacencyList, int start) {
 
 void printPaths(map<int, DijkstraVertex> vertexMap, int start) {
     for (auto e : vertexMap) {
-        if (e.second.known()){
+        if (e.second.known()) {
             cout << "vertex: " << e.second.getName() << endl << "cost from " 
                  << start << ": " << e.second.getDistance() << endl
                  << "previous : " << e.second.getPrevious() << endl 
