@@ -19,3 +19,4 @@ all:
 
 clean:
 	rm -f $(PROG_NAME)
+	rm -rf *o main.o

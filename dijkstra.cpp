@@ -93,17 +93,17 @@ void dijkstra(map<int, vector<AdjVertex>> adjacencyList, int start) {
         currentVertex = pq.top().getName();
         pq.pop();
         for (auto vertex : adjacencyList[currentVertex]) {
-            if (!vertexMap[vertex].known()) {
-                vertexMap[vertex].setDistance(e.weight + vertexMap[currentVertex].getDistance());
-                vertexMap[vertex].setPrevious(currentVertex);
-                vertexMap[vertex].setKnown(true);
-                pq.push(vertexMap[vertex]);
+            if (!vertexMap[vertex.name].known()) {
+                vertexMap[vertex.name].setDistance(vertex.weight + vertexMap[currentVertex].getDistance());
+                vertexMap[vertex.name].setPrevious(currentVertex);
+                vertexMap[vertex.name].setKnown(true);
+                pq.push(vertexMap[vertex.name]);
                 
             }
             else {
-                if (vertexMap[vertex].getDistance() > vertexMap[currentVertex].getDistance() + vertex.weight) {
-                    vertexMap[vertex].setDistance(vertexMap[currentVertex].getDistance() + vertex.weight);
-                    vertexMap[vertex].setPrevious(currentVertex);
+                if (vertexMap[vertex.name].getDistance() > vertexMap[currentVertex].getDistance() + vertex.weight) {
+                    vertexMap[vertex.name].setDistance(vertexMap[currentVertex].getDistance() + vertex.weight);
+                    vertexMap[vertex.name].setPrevious(currentVertex);
                 }
             }
         }
